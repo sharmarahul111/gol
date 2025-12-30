@@ -4,6 +4,8 @@ ___
 This is me trying to make a game of life simulator in JavaScript
 enjoy :-)
 
+![GOL Preview](gol-preview.gif)
+
 [See In Action!!](https://sharmarahul111.github.io/gol/)
 ___
 
