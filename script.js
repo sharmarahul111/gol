@@ -13,6 +13,9 @@ canvas.height = innerHeight - 60;
 let ON = false
 let GRID = true
 let DEBUG = false
+let SPEED = 1
+
+let currentSpeed = 0
 
 let size = 30
 let cols = Math.floor(canvas.height / size)
@@ -20,18 +23,23 @@ let rows = Math.floor(canvas.width / size)
 let grid = new Grid(rows, cols, size)
 
 function animate() {
-  c.fillStyle = "rgba(40,40,40,1)"
-  c.fillRect(0, 0, innerWidth, innerHeight)
+  // the > condition is for edge cases where currentSpeed becomes greater when changing speed
+  if (currentSpeed >= SPEED) {
+    c.fillStyle = "rgba(40,40,40,1)"
+    c.fillRect(0, 0, innerWidth, innerHeight)
 
-  grid.draw(c)
-  grid.updateCheck()
-  grid.update()
+    grid.draw(c)
+    grid.updateCheck()
+    grid.update()
+    currentSpeed = 0
 
+  } else {
+    currentSpeed++
+  }
 
   if (ON) requestAnimationFrame(animate)
   // requestAnimationFrame(animate)
 }
-animate()
 
 addEventListener('resize', () => {
   canvas.width = window.innerWidth;
@@ -154,13 +162,14 @@ canvas.addEventListener('click', e => {
 })
 let playPauseBtn = document.querySelector("button#playPause")
 let clearBtn = document.querySelector("button#clear")
+let speedSlider = document.querySelector("input#speed")
 playPauseBtn.addEventListener("click", () => {
   if (ON) {
     ON = false
-    playPauseBtn.innerHTML = "Resume"
+    playPauseBtn.innerHTML = "RESUME"
   } else {
     ON = true
-    playPauseBtn.innerHTML = "Pause"
+    playPauseBtn.innerHTML = "PAUSE"
     animate()
   }
 })
@@ -173,3 +182,15 @@ clearBtn.addEventListener("click", () => {
   grid.draw(c)
 
 })
+speedSlider.addEventListener("change", () => {
+  if (speedSlider.value >= 1 && speedSlider.value <= 20) {
+    SPEED = speedSlider.value
+    document.querySelector("span.speed>label").innerHTML = "SPEED: " + SPEED.toString().padStart(2, "0")
+  }
+})
+
+// starting the Game
+c.fillStyle = "rgba(40,40,40,1)"
+c.fillRect(0, 0, innerWidth, innerHeight)
+grid.draw(c)
+

@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   overflow: hidden;
-  background: #333;
+  background: #282828;
 }
 div.controls {
   display: flex;
@@ -13,14 +13,29 @@ div.controls {
   flex-direction: row;
 
 }
-button {
+button, label {
   /* all: unset; */
   display: inline-flex;
   height: auto;
   width: auto;
   padding: 8px;
   margin: 8px;
-  backgroud: #333;
+  backgroud: #282828;
   color: white;
-  font-size: 20px Arial;
+  font: 22px Arial;
+  font-weight: bold;
+}
+
+label {
+  margin: 0;
+}
+span.speed {
+  border: 2px inset #ccc;
+  height: 45px;
+  display:inline-flex;
+  align-items: center;
+}
+input#speed {
+  max-width: 160px;
+  margin-right: 8px;
 }
