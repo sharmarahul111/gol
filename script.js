@@ -7,20 +7,20 @@
 let canvas = document.querySelector("canvas");
 let c = canvas.getContext("2d");
 canvas.width = innerWidth;
-canvas.height = innerHeight;
+canvas.height = innerHeight - 60;
 
 // Game control variables
 let ON = false
 let GRID = true
-let DEBUG = true
+let DEBUG = false
 
 let size = 30
-let cols = Math.floor(innerHeight / size)
-let rows = Math.floor(innerWidth / size)
+let cols = Math.floor(canvas.height / size)
+let rows = Math.floor(canvas.width / size)
 let grid = new Grid(rows, cols, size)
 
 function animate() {
-  c.fillStyle = "rgba(0,0,0,1)"
+  c.fillStyle = "rgba(40,40,40,1)"
   c.fillRect(0, 0, innerWidth, innerHeight)
 
   grid.draw(c)
@@ -28,8 +28,8 @@ function animate() {
   grid.update()
 
 
-  // if (ON) requestAnimationFrame(animate)
-  requestAnimationFrame(animate)
+  if (ON) requestAnimationFrame(animate)
+  // requestAnimationFrame(animate)
 }
 animate()
 
@@ -39,13 +39,7 @@ addEventListener('resize', () => {
 });
 
 // helper functions
-function start() {
-  animate()
-  ON = true
-}
-function stop() {
-  ON = false
-}
+
 function alive(x, y) {
   grid.data[x][y].alive = true
 }
@@ -150,10 +144,32 @@ function getAlive() {
 
 
 canvas.addEventListener('click', e => {
-  // console.log(e)
   let box = canvas.getBoundingClientRect()
   let x = Math.floor((e.clientX - box.top) / size)
   let y = Math.floor((e.clientY - box.left) / size)
-  grid.data[x][y].alive = !grid.data[x][y].alive
-  // console.log(x, y)
+  if (grid.data[x] && grid.data[x][y]) {
+    grid.data[x][y].alive = !grid.data[x][y].alive
+  }
+  grid.draw(c)
+})
+let playPauseBtn = document.querySelector("button#playPause")
+let clearBtn = document.querySelector("button#clear")
+playPauseBtn.addEventListener("click", () => {
+  if (ON) {
+    ON = false
+    playPauseBtn.innerHTML = "Resume"
+  } else {
+    ON = true
+    playPauseBtn.innerHTML = "Pause"
+    animate()
+  }
+})
+clearBtn.addEventListener("click", () => {
+  grid.data.forEach(row => {
+    row.forEach(col => {
+      col.alive = false
+    })
+  })
+  grid.draw(c)
+
 })

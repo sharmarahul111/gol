@@ -70,7 +70,7 @@ class Grid {
         let cell = this.data[i][j]
 
         c.beginPath()
-        c.fillStyle = cell.alive ? "white" : "black"
+        c.fillStyle = cell.alive ? "white" : "rgba(40,40,40,1)"
         c.fillRect(cell.x * this.size, cell.y * this.size, this.size, this.size)
         if (GRID) {
           c.lineWidth = 1
