@@ -12,6 +12,7 @@ ___
 # Project Notes
 
 ## TODO
+- **OPTIMIZE NEIGHBOUR COUNT FUNCTION!!!!**
 - **Grid size control**
 - **Mousedown and tap-and-hold support**
 - **Additional controls & info panel**
