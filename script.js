@@ -37,7 +37,7 @@ let grid = new Grid(rows, cols, size)
 
 function animate() {
   // the > condition is for edge cases where currentSpeed becomes greater when changing speed
-  if (currentSpeed >= SPEED) {
+  if (currentSpeed >= (20 - SPEED)) {
     c.fillStyle = "rgba(40,40,40,1)"
     c.fillRect(0, 0, innerWidth, innerHeight)
 
