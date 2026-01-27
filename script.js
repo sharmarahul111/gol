@@ -17,10 +17,10 @@
 // FIXME: Canvas alignment
 // FIXME: Canvas resize
 
-let canvas = document.querySelector("canvas");
-let c = canvas.getContext("2d");
-canvas.width = innerWidth;
-canvas.height = innerHeight - 120;
+let canvas = document.querySelector("canvas")
+let c = canvas.getContext("2d")
+canvas.width = innerWidth
+canvas.height = innerHeight - 120
 
 // Game control variables
 let ON = false
@@ -51,9 +51,8 @@ function animate() {
   }
 
   if (ON) requestAnimationFrame(animate)
-  // requestAnimationFrame(animate)
 }
-
+// Needs proper implementation
 // addEventListener('resize', () => {
 //   canvas.width = window.innerWidth;
 //   canvas.height = window.innerHeight;
@@ -87,6 +86,7 @@ function getAlive() {
 
 
 canvas.addEventListener('click', e => {
+  // find the grid on which user cli ked
   let box = canvas.getBoundingClientRect()
   let x = Math.floor((e.clientX - box.top) / size)
   let y = Math.floor((e.clientY - box.left) / size)
